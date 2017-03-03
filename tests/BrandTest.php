@@ -35,23 +35,22 @@
             $this->assertEquals($brand_name, $result);
         }
 
-        // function test_setStoreName()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //
-        //     $testGetStoreName = new Store($store_name, $store_phone, $store_address);
-        //
-        //     ///   Act   ///
-        //     $testGetStoreName->setStoreName("REI");
-        //     $result = $testGetStoreName->getStoreName();
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals("REI", $result);
-        // }
-        //
+        function test_setBrandName()
+        {
+            ///   Arrange   ///
+            $brand_name = "Vibram FiveFingers";
+            $new_brand = new Brand($brand_name);
+
+            $testGetBrandName = new Brand($brand_name);
+
+            ///   Act   ///
+            $testGetBrandName->setBrandName("Chacos");
+            $result = $testGetBrandName->getBrandName();
+
+            ///   Assert   ///
+            $this->assertEquals("Chacos", $result);
+        }
+
         //
         // function test_getStorePhone()
         // {
