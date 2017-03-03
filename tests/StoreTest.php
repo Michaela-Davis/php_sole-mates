@@ -22,7 +22,7 @@
             ///   Arrange   ///
             $store_name = "REI";
             $store_phone = "5032211938";
-            $store_address = "St Portland OR";
+            $store_address = "1405 NW Johnson St. Portland, OR";
             $new_store = new Store($store_name, $store_phone, $store_address);
             $new_store->save();
 
@@ -33,13 +33,30 @@
             $this->assertEquals($store_name, $result);
         }
 
+        function test_setStoreName()
+        {
+            ///   Arrange   ///
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+
+            $testGetStoreName = new Store($store_name, $store_phone, $store_address);
+
+            ///   Act   ///
+            $testGetStoreName->setStoreName("REI");
+            $result = $testGetStoreName->getStoreName();
+
+            ///   Assert   ///
+            $this->assertEquals("REI", $result);
+        }
+
 
         function test_getStorePhone()
         {
             ///   Arrange   ///
             $store_name = "REI";
             $store_phone = "5032211938";
-            $store_address = "St Portland OR";
+            $store_address = "1405 NW Johnson St. Portland, OR";
             $new_store = new Store($store_name, $store_phone, $store_address);
             $new_store->save();
 
@@ -48,6 +65,23 @@
 
             ///   Assert   ///
             $this->assertEquals($store_phone, $result);
+        }
+
+        function test_setStorePhone()
+        {
+            ///   Arrange   ///
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+
+            $testGetStorePhone = new Store($store_name, $store_phone, $store_address);
+
+            ///   Act   ///
+            $testGetStorePhone->setStorePhone("5032211938");
+            $result = $testGetStorePhone->getStorePhone();
+
+            ///   Assert   ///
+            $this->assertEquals("5032211938", $result);
         }
 
         function test_getStoreAddress()
@@ -63,8 +97,26 @@
             $result = $new_store->getStoreAddress($store_address);
 
             ///   Assert   ///
-            $this->assertEquals($store_address, $result);
+            $this->assertEquals("1405 NW Johnson St. Portland, OR", $result);
         }
+
+        function test_setStoreAddress()
+        {
+            ///   Arrange   ///
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "St Portland OR";
+
+            $testGetStoreAddress = new Store($store_name, $store_phone, $store_address);
+
+            ///   Act   ///
+            $testGetStoreAddress->setStoreAddress("5032211938");
+            $result = $testGetStoreAddress->getStoreAddress();
+
+            ///   Assert   ///
+            $this->assertEquals("5032211938", $result);
+        }
+
 
         function test_getStoreId()
         {
@@ -72,33 +124,33 @@
             $store_name = "REI";
             $store_phone = "5032211938";
             $store_address = "1405 NW Johnson St. Portland, OR";
-            $store_id = null;
-            $new_store = new Store($store_name, $store_phone, $store_address);
-            $new_store->save();
+            $store_id = 1;
+
+            $testGetStoreId = new Store($store_name, $store_phone, $store_address, $store_id);
 
             ///   Act   ///
-            $result = $new_store->getStoreId($store_id);
+            $result = $testGetStoreId->getStoreId($store_id);
 
             ///   Assert   ///
             $this->assertEquals($store_id, $result);
         }
 
-        // function test_save()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "St Portland OR";
-        //
-        //     $new_store = new Store($store_name, $store_phone, $store_address);
-        //     $new_store->save();
-        //
-        //     ///   Act   ///
-        //     $result = Store::getAll();
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals([$new_store], $result);
-        // }
+        function test_save()
+        {
+            ///   Arrange   ///
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+            $store_id = null;
+            $new_store = new Store($store_name, $store_phone, $store_address, $store_id);
+            $new_store->save();
+
+            ///   Act   ///
+            $result = Store::getAll();
+
+            ///   Assert   ///
+            $this->assertEquals([$new_store], $result);
+        }
 
 
     }
