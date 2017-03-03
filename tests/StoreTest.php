@@ -224,5 +224,30 @@
             //Assert
             $this->assertEquals([$testGetStoreName2], Store::getAll());
         }
+
+        function testDeleteAll()
+        {
+            //Arrange
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+
+            $testGetStoreName = new Store($store_name, $store_phone, $store_address);
+            $testGetStoreName->save();
+
+            $store_name2 = "Next Adventure";
+            $store_phone2 = "5032330706";
+            $store_address2 = "426 SE Grand Ave, Portland, OR 97214";
+
+            $testGetStoreName2 = new Store($store_name, $store_phone, $store_address);
+            $testGetStoreName2->save();
+
+            //Act
+            Store::deleteAll();
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertEquals([], $result);
+        }
     }
 ?>
