@@ -180,5 +180,25 @@
             $this->assertEquals([$testGetStoreName, $testGetStoreName2], $result);
         }
 
+        function testUpdate()
+        {
+            //Arrange
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+
+            $testGetStoreName = new Store($store_name, $store_phone, $store_address);
+            $testGetStoreName->save();
+
+            $new_store_name = "Next Adventure";
+            $new_store_phone = "5032330706";
+            $new_store_address = "426 SE Grand Ave, Portland, OR 97214";
+
+            //Act
+            $testGetStoreName->update($new_store_name, $new_store_phone, $new_store_address);
+
+            //Assert
+            $this->assertEquals($new_store_name, $testGetStoreName->getStoreName());
+        }
     }
 ?>
