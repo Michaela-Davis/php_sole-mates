@@ -67,6 +67,12 @@
             $this->setStorePhone($new_store_phone);
             $this->setStoreAddress($new_store_address);
         }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE store_id = {$this->getStoreId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE st_id = {$this->getStoreId()};");
+        }
         /////     end METHODS     /////
 
 
