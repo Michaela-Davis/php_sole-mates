@@ -2,12 +2,12 @@
     class Brand
     {
         private $brand_name;
-        private $id;
+        private $brand_id;
 
-        function __construct($brand_name, $id = null)
+        function __construct($brand_name, $brand_id = null)
         {
             $this->brand_name = $brand_name;
-            $this->id = $id;
+            $this->brand_id = $brand_id;
         }
 
 
@@ -25,10 +25,10 @@
         ///   BrandId getter  ///
         function getBrandId()
         {
-            return $this->id;
+            return $this->brand_id;
         }
 
-        
+
         /////     begin METHODS     /////
 
         /////     end METHODS     /////
