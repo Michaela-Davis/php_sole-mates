@@ -51,91 +51,21 @@
             $this->assertEquals("Chacos", $result);
         }
 
-        //
-        // function test_getStorePhone()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //     $new_store = new Store($store_name, $store_phone, $store_address);
-        //     $new_store->save();
-        //
-        //     ///   Act   ///
-        //     $result = $new_store->getStorePhone($store_phone);
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals($store_phone, $result);
-        // }
-        //
-        // function test_setStorePhone()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //
-        //     $testGetStorePhone = new Store($store_name, $store_phone, $store_address);
-        //
-        //     ///   Act   ///
-        //     $testGetStorePhone->setStorePhone("5032211938");
-        //     $result = $testGetStorePhone->getStorePhone();
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals("5032211938", $result);
-        // }
-        //
-        // function test_getStoreAddress()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //     $new_store = new Store($store_name, $store_phone, $store_address);
-        //     $new_store->save();
-        //
-        //     ///   Act   ///
-        //     $result = $new_store->getStoreAddress($store_address);
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals("1405 NW Johnson St. Portland, OR", $result);
-        // }
-        //
-        // function test_setStoreAddress()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "St Portland OR";
-        //
-        //     $testGetStoreAddress = new Store($store_name, $store_phone, $store_address);
-        //
-        //     ///   Act   ///
-        //     $testGetStoreAddress->setStoreAddress("5032211938");
-        //     $result = $testGetStoreAddress->getStoreAddress();
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals("5032211938", $result);
-        // }
-        //
-        //
-        // function test_getStoreId()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //     $store_id = 1;
-        //
-        //     $testGetStoreId = new Store($store_name, $store_phone, $store_address, $store_id);
-        //
-        //     ///   Act   ///
-        //     $result = $testGetStoreId->getStoreId($store_id);
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals($store_id, $result);
-        // }
-        //
+        function test_getBrandId()
+        {
+            ///   Arrange   ///
+            $brand_name = "Vibram FiveFingers";
+            $brand_id = 1;
+
+            $testGetBrandId = new Brand($brand_name, $brand_id);
+
+            ///   Act   ///
+            $result = $testGetBrandId->getBrandId($brand_id);
+
+            ///   Assert   ///
+            $this->assertEquals($brand_id, $result);
+        }
+
         // function test_save()
         // {
         //     ///   Arrange   ///
