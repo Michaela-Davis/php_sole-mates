@@ -59,6 +59,14 @@
             $GLOBALS['DB']->exec("INSERT INTO stores (store_name, store_phone, store_address) VALUES ('{$this->getStoreName()}', '{$this->getStorePhone()}', '{$this->getStoreAddress()}');");
             $this->store_id = $GLOBALS['DB']->lastInsertId();
         }
+
+        function update($new_store_name, $new_store_phone, $new_store_address)
+        {
+            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}', store_phone = '{$new_store_phone}', store_address = '{$new_store_address}' WHERE id = {$this->getStoreId()};");
+            $this->setStoreName($new_store_name);
+            $this->setStorePhone($new_store_phone);
+            $this->setStoreAddress($new_store_address);
+        }
         /////     end METHODS     /////
 
 
