@@ -66,23 +66,21 @@
             $this->assertEquals($brand_id, $result);
         }
 
-        // function test_save()
-        // {
-        //     ///   Arrange   ///
-        //     $store_name = "REI";
-        //     $store_phone = "5032211938";
-        //     $store_address = "1405 NW Johnson St. Portland, OR";
-        //
-        //     $new_store = new Store($store_name, $store_phone, $store_address);
-        //     $new_store->save();
-        //
-        //     ///   Act   ///
-        //     $result = Store::getAll();
-        //
-        //     ///   Assert   ///
-        //     $this->assertEquals($new_store, $result[0]);
-        // }
-        //
+        function test_save()
+        {
+            ///   Arrange   ///
+            $brand_name = "Vibram FiveFingers";
+
+            $testGetBrandId = new Brand($brand_name);
+            $testGetBrandId->save();
+
+            ///   Act   ///
+            $result = Brand::getAll();
+
+            ///   Assert   ///
+            $this->assertEquals($testGetBrandId, $result[0]);
+        }
+
         // function testGetAll()
         // {
         //     //Arrange

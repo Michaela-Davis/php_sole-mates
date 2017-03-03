@@ -32,27 +32,25 @@
         /////     begin METHODS     /////
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO stores (store_name) VALUES ('{$this->getBrandName()}');");
+            $GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}');");
             $this->brand_id = $GLOBALS['DB']->lastInsertId();
         }
         /////     end METHODS     /////
 
 
         /////     begin Static METHODS     /////
-        // static function getAll()
-        // {
-        //     $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores ORDER BY store_name ASC;");
-        //     $all_stores = array();
-        //     foreach($returned_stores as $store) {
-        //         $store_name = $store['store_name'];
-        //         $store_phone = $store['store_phone'];
-        //         $store_address = $store['store_address'];
-        //         $store_id = $store['store_id'];
-        //         $new_store = new Store($store_name, $store_phone, $store_address, $store_id);
-        //         array_push($all_stores, $new_store);
-        //     }
-        //     return $all_stores;
-        // }
+        static function getAll()
+        {
+            $returned_brands = $GLOBALS['DB']->query("SELECT * FROM brands ORDER BY brand_name ASC;");
+            $all_brands = array();
+            foreach($returned_brands as $brand) {
+                $brand_name = $brand['brand_name'];
+                $brand_id = $brand['brand_id'];
+                $new_brand = new Brand($brand_name, $brand_id);
+                array_push($all_brands, $new_brand);
+            }
+            return $all_brands;
+        }
 
         static function deleteAll()
         {
