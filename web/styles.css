@@ -1,0 +1,21 @@
+/*begin ELEMENT styling*/
+body, h1, h3 {
+    font-family: 'Handlee', cursive;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+/*end ELEMENT styling*/
+
+
+/*begin HEADER BANNER*/
+.header-banner {
+    background-color: #00bc8c;
+    display: block;
+    text-align: center;
+    padding: 1px;
+    margin-bottom: 30px;
+}
+/*end HEADER BANNER*/
