@@ -249,5 +249,56 @@
             $result = Store::getAll();
             $this->assertEquals([], $result);
         }
+
+        function testAddBrand()
+        {
+            //Arrange
+            $brand_name = "Vibram FiveFingers";
+
+            $test_brand = new Brand($brand_name);
+            $test_brand->save();
+
+            $store_name = "REI";
+            $store_phone = "5032211938";
+            $store_address = "1405 NW Johnson St. Portland, OR";
+
+            $test_store = new Store($store_name, $store_phone, $store_address);
+            $test_store->save();
+
+            //Act
+            $test_store->addBrand($test_brand);
+
+            //Assert
+            $this->assertEquals([$test_brand], $test_store->getBrandsSold());
+        }
+
+        // function testGetBrandsSold()
+        // {
+        //     //Arrange
+        //     $brand_name = "Vibram FiveFingers";
+        //
+        //     $test_brand = new Brand($brand_name);
+        //     $test_brand->save();
+        //
+        //     $brand_name2 = "Chacos";
+        //
+        //     $test_brand2 = new Brand($brand_name);
+        //     $test_brand2->save();
+        //
+        //
+        //     $store_name = "REI";
+        //     $store_phone = "5032211938";
+        //     $store_address = "1405 NW Johnson St. Portland, OR";
+        //
+        //     $test_store = new Store($store_name, $store_phone, $store_address);
+        //     $test_store->save();
+        //
+        //     //Act
+        //     $test_store->addBrand($test_brand);
+        //     $test_store->addBrand($test_brand2);
+        //
+        //     //Assert
+        //     $this->assertEquals($test_brand->getBrandsSold(), [$test_brand, $test_brand2]);
+        // }
     }
 ?>
