@@ -87,8 +87,8 @@
 
             foreach ($return_brands as $brand){
                 $brand_name = $brand['brand_name'];
-                $return_id = $brand['brand_id'];
-                $new_brand = new Brand($brand_name, $return_id);
+                $brand_id = $brand['brand_id'];
+                $new_brand = new Brand($brand_name, $brand_id);
                 array_push($brands, $new_brand);
             }
             return $brands;
