@@ -56,16 +56,17 @@
         /////     begin METHODS     /////
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO stores (store_name, store_phone, store_address) VALUES ('{$this->getStoreName()}', '{$this->getStorePhone()}', '{$this->getStoreAddress()}');");
+            $GLOBALS['DB']->exec("INSERT INTO stores (store_name, store_phone, store_address) VALUES ('{$this->getStoreName()}', '{$this->getStorePhone()}', '{$this->store_address}');");
             $this->store_id = $GLOBALS['DB']->lastInsertId();
         }
 
         function update($new_store_name, $new_store_phone, $new_store_address)
         {
-            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}', store_phone = '{$new_store_phone}', store_address = '{$new_store_address}' WHERE id = {$this->getStoreId()};");
-            $this->setStoreName($new_store_name);
-            $this->setStorePhone($new_store_phone);
-            $this->setStoreAddress($new_store_address);
+            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}', store_phone = '{$new_store_phone}',
+                store_address = '{$new_store_address}' WHERE id = {$this->getStoreId()};");
+            // $this->store_name = (string) $new_store_name;
+            // $this->store_phone = (string) $new_store_phone;
+            // $this->store_address = (string) $new_store_address;
         }
 
         function delete()
@@ -115,6 +116,19 @@
         static function deleteAll()
         {
           $GLOBALS['DB']->exec("DELETE FROM stores;");
+        }
+
+        static function findStore($search_id)
+        {
+            $found_store = null;
+            $all_stores = Store::getAll();
+            foreach($all_stores as $store) {
+                $found_id = $store->getStoreId();
+                if ($search_id == $found_id) {
+                    $found_store = $store;
+                }
+            }
+            return $found_store;
         }
         /////     end Static METHODS     /////
     }
