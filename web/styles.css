@@ -1,14 +1,28 @@
 /*begin ELEMENT styling*/
-body, h1, h3 {
+body, h1, h2 {
     font-family: 'Handlee', cursive;
+    font: 2em;
 }
 
 footer {
     position: absolute;
     bottom: 0;
 }
+
+a {
+    font-size: 20px;
+}
 /*end ELEMENT styling*/
 
+.navbar,
+.emphasis {
+    font-size: 2em
+}
+
+input {
+    color: black;
+    font-size: 2em
+}
 
 /*begin HEADER BANNER*/
 .header-banner {
