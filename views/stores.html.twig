@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 {% include '/components/head.html.twig' %}
@@ -7,7 +8,66 @@
         {% include '/components/navbar.html.twig' %}
         <h1>Stores</h1>
 
+        <div class="container">
+            <div class="container">
+                <div class="container">
 
+                    <div class="row">
+
+                        <!-- Add Store Form -->
+                        <form method="post" action="/add-store" id="add-store-form">
+                            <div>
+                                <input type="text" name="store_name" placeholder="Store name">
+                                <br><br>
+                                <input type="text" name="store_phone" placeholder="Store phone">
+                                <br><br>
+                                <input type="text" name="store_address" placeholder="Store address">
+                                <br><br>
+                            </div>
+
+                            <!-- Add Store Button -->
+                            <div id="add-store-button">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; &nbsp;Add Store&nbsp;</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br><br>
+                {% if blank_form is not empty %}
+                <p class="emphasis">Please enter a store name, address and phone number then resubmit!</p>
+                <br><br>
+                <!-- <p><a href="/stores/{# store.getStoreId #}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Return to Stores page</a></p> -->
+                {% else %}
+
+                {% if stores is defined %}
+                <ul>
+                    {% for store in stores %}
+                    <!-- <div class="row"> -->
+                        <div class="col-md-6">
+                            <li>
+                                <a href="/stores/{{ store.getStoreId }}">{{store.getStoreName}}</a>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-2">
+                                <form action="/stores/{{ store.getStoreId}}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                </form>
+                            </div>
+                        </li>
+                    <!-- </div> -->
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>There are no stores yet!</p>
+                {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
     </div>
     {% include '/components/footerBanner.html.twig' %}
 </body>

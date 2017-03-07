@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    {% include '/components/head.html.twig' %}
+    <body>
+        {% include '/components/headerBanner.html.twig' %}
+        <div class="container">
+            {% include '/components/navbar.html.twig' %}
+
+            <!-- Edit Store Form -->
+            <form method="post" action="/stores/{{ store.getStoreId }}/edit" id="add-store-form">
+                <div>
+                    <input type="text" name="store_name" placeholder="{{ store.getStoreName }}">
+                    <br><br>
+                    <input type="text" name="store_phone" placeholder="{{ store.getStorePhone }}">
+                    <br><br>
+                    <input type="text" name="store_address" placeholder="{{ store.getStoreAddress }}">
+                    <br><br>
+                </div>
+
+                <!-- Edit Store Button -->
+                <div id="add-store-button">
+                    <button class="btn btn-info" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; &nbsp;Update Store&nbsp;</button>
+                </div>
+            </form>
+
+
+        </div>
+        {% include '/components/footerBanner.html.twig' %}
+    </body>
+</html>

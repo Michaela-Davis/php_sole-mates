@@ -7,6 +7,19 @@
             {% include '/components/navbar.html.twig' %}
 
 
+            <h1>{{ store.getStoreName }}</h1>
+            <h2>{{ store.getStorePhone }}</h2>
+            <h2>{{ store.getStoreAddress }}</h2>
+
+            {% if brands is not empty %}
+            <ul>
+            {% for brand in brands %}
+                    <li>{{ brand.getBrandName }}</li>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <h1>No Brands Exist</h1>
+            {% endif %}
 
 
         </div>
