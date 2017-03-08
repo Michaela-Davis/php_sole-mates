@@ -9,6 +9,60 @@
             <h1>Brands</h1>
 
 
+            <div class="container">
+                <div class="container">
+                    <div class="container">
+
+                        <div class="row">
+
+                            <!-- Add Brand Form -->
+                            <form method="post" action="/add-brand" id="add-brand-form">
+                                <div>
+                                    <input type="text" name="brand_name" placeholder="Brand name">
+                                    <br><br>
+
+                                </div>
+
+                                <!-- Add Brand Button -->
+                                <div id="add-brand-button">
+                                    <button class="btn btn-info" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; &nbsp;Add Brand&nbsp;</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br><br>
+                    {% if blank_form is not empty %}
+                    <p class="emphasis">Please enter a brand name then resubmit!</p>
+                    <br><br>
+                    <!-- <p><a href="/stores/{# store.getBrandId #}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Return to Brands page</a></p> -->
+                    {% else %}
+
+                    {% if brands is defined %}
+                    <ul>
+                        {% for brand in brands %}
+                        <!-- <div class="row"> -->
+                            <div class="col-md-6">
+                                <li>
+                                    <a href="/brands/{{ brand.getBrandId }}">{{ brand.getBrandName }}</a>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2">
+                                    <form action="/brands/{{ brand.getBrandId }}" method="post">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        <!-- </div> -->
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>There are no brands yet!</p>
+                    {% endif %}
+                    {% endif %}
 
 
         </div>

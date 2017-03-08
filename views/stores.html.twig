@@ -45,14 +45,14 @@
                     <!-- <div class="row"> -->
                         <div class="col-md-6">
                             <li>
-                                <a href="/stores/{{ store.getStoreId }}">{{store.getStoreName}}</a>
+                                <a href="/stores/{{ store.getStoreId }}">{{ store.getStoreName }}</a>
                             </div>
                             <div class="col-md-2">
                             </div>
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-2">
-                                <form action="/stores/{{ store.getStoreId}}" method="post">
+                                <form action="/stores/{{ store.getStoreId }}" method="post">
                                     <input type="hidden" name="_method" value="delete">
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                                 </form>

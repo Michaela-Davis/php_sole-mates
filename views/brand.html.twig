@@ -6,7 +6,21 @@
         <div class="container">
             {% include '/components/navbar.html.twig' %}
 
+            <!-- Add Store Form -->
+            <form method="post" action="/add-store-to-brand/{{ brand.brand_id }}" id="add-store-form">
+                <div>
+                    <input type="text" name="store_name" placeholder="Store name">
+                    <br><br>
+                    <input class="hidden" type="text" name="store_phone" placeholder="Store phone">
+                    <input class="hidden" type="text" name="store_address" placeholder="Store address">
 
+                </div>
+
+                <!-- Add Store Button -->
+                <div id="add-store-button">
+                    <button class="btn btn-info" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; &nbsp;Add Store&nbsp;</button>
+                </div>
+            </form>
 
 
         </div>

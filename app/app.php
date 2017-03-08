@@ -27,12 +27,67 @@
 
     ///////////      begin BRAND Routes      ///////////
 
+    $app->get("/brands", function() use ($app) {
+        $blank_form = array();
+        return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
+    });
+
+    $app->post("/add-brand", function() use ($app) {
+        $new_brand_name = $_POST['brand_name'];
+        $new_brand_name = str_replace("'", "", $new_brand_name);
+        $blank_form = array();
+        if (!$new_brand_name) {
+            array_push($blank_form, "empty");
+        } else {
+            $new_brand = new Brand($new_brand_name);
+            $new_brand->save();
+        }
+
+        return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
+    });
+
+    // $app->post("/add-store-to-brand/{brand_id}", function($brand_id) use ($app) {
+    //     $search_brand = Brand::findBrand($brand_id);
+    //
+    //     $new_brand_name = $_POST['brand_name'];
+    //     if ($search_brand->getBrandName() == $new_brand_name) {
+    //
+    //     } else {
+    //         $new_brand_name = str_replace("'", "", $new_brand_name);
+    //         $blank_form = array();
+    //         if (!$new_brand_name) {
+    //             array_push($blank_form, "empty");
+    //         } else {
+    //             $new_brand = new Brand($new_brand_name);
+    //             $new_brand->save();
+    //         }
+    //     }
+    //
+    //
+    //     return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
+    // });
+
+    $app->get("/brands/{brand_id}", function($brand_id) use ($app) {
+
+        $search_brand = Brand::findBrand($brand_id);
+        $blank_form = array();
+
+        return $app['twig']->render('brand.html.twig', array('brand' => $search_brand, 'stores' => $search_brand->getStoresSelling(), 'blank_form' => $blank_form));
+    });
+
+    $app->delete("/brands/{brand_id}", function($brand_id) use ($app) {
+        $brand = Brand::findBrand($brand_id);
+        $brand->delete();
+        $blank_form = array();
+        return $app['twig']->render('brands.html.twig', array('brands' => Brand::getAll(), 'blank_form' => $blank_form));
+    });
 
     ///////////      end BRAND Routes      ///////////
 
 
 
     ///////////      begin STORE Routes      ///////////
+
     $app->post("/add-store", function() use ($app) {
         $new_store_name = $_POST['store_name'];
         $new_store_phone = $_POST['store_phone'];

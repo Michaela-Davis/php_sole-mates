@@ -56,6 +56,13 @@
             }
             return $stores;
         }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM brands WHERE brand_id = {$this->getBrandId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE br_id = {$this->getBrandId()};");
+        }
+
         /////     end METHODS     /////
 
 
@@ -76,6 +83,19 @@
         static function deleteAll()
         {
           $GLOBALS['DB']->exec("DELETE FROM brands;");
+        }
+
+        static function findBrand($search_id)
+        {
+            $found_brand = null;
+            $all_brands = Brand::getAll();
+            foreach($all_brands as $brand) {
+                $found_id = $brand->getBrandId();
+                if ($search_id == $found_id) {
+                    $found_brand = $brand;
+                }
+            }
+            return $found_brand;
         }
         /////     end Static METHODS     /////
     }
