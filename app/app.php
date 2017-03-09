@@ -110,8 +110,8 @@
         $blank_form = array();
 
         $brand->addStore($store);
-
-        return $app['twig']->render('store.html.twig', array('store' => $store, 'store_brands' => $store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
+        // go back to store page at `/stores/{store_id}`
+        return $app->redirect("/stores/" . $store_id);
     });
 
     $app->patch("/stores/{store_id}", function($store_id) use ($app) {
