@@ -53,8 +53,6 @@
 
         $brand->addStore($store);
 
-        return $app['twig']->render('store.html.twig', array('store' => $store, 'store_brands' => $store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
-
         return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
     });
 
