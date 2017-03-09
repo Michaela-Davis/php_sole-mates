@@ -11,17 +11,24 @@
             <h2>{{ store.getStorePhone }}</h2>
             <h2>{{ store.getStoreAddress }}</h2>
 
-            {% if brands is not empty %}
+            <!-- List of all stores to add -->
+            <form class="" action="/add-brand-to-store/{{ store.getStoreId }}" method="post">
+                <select class="blackText" name="brand_to_add">
+                    {% if all_brands is not empty %}
+                        {% for brand in all_brands %}
+                            <option class="blackText" value="{{ brand.getBrandId }}">{{ brand.getBrandName }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <button type="submit" name="button">Add Brand to Store</button>
+            </form>
+
+            <h2>Brands at {{ store.getStoreName }}</h2>
             <ul>
-            {% for brand in brands %}
+                {% for brand in store_brands %}
                     <li>{{ brand.getBrandName }}</li>
-            {% endfor %}
+                {% endfor %}
             </ul>
-            {% else %}
-            <h1>No Brands Exist</h1>
-            {% endif %}
-
-
         </div>
         {% include '/components/footerBanner.html.twig' %}
     </body>

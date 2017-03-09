@@ -33,3 +33,7 @@ input {
     margin-bottom: 30px;
 }
 /*end HEADER BANNER*/
+
+.blackText {
+    color: black !important;
+}

@@ -130,6 +130,19 @@
             }
             return $found_store;
         }
+
+        static function findStoreByName($search_name)
+        {
+            $found_store = null;
+            $all_stores = Store::getAll();
+            foreach($all_stores as $store) {
+                $found_name = $store->getStoreName();
+                if ($search_name == $found_name) {
+                    $found_store = $store;
+                }
+            }
+            return $found_store;
+        }
         /////     end Static METHODS     /////
     }
 ?>

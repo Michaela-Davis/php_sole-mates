@@ -46,26 +46,33 @@
         return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
     });
 
-    // $app->post("/add-store-to-brand/{brand_id}", function($brand_id) use ($app) {
-    //     $search_brand = Brand::findBrand($brand_id);
-    //
-    //     $new_brand_name = $_POST['brand_name'];
-    //     if ($search_brand->getBrandName() == $new_brand_name) {
-    //
-    //     } else {
-    //         $new_brand_name = str_replace("'", "", $new_brand_name);
-    //         $blank_form = array();
-    //         if (!$new_brand_name) {
-    //             array_push($blank_form, "empty");
-    //         } else {
-    //             $new_brand = new Brand($new_brand_name);
-    //             $new_brand->save();
-    //         }
-    //     }
-    //
-    //
-    //     return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
-    // });
+    $app->post("/add-store-to-brand/{brand_id}", function($brand_id) use ($app) {
+        // query the database to see if store_name already exists
+        $new_store_name = $_POST['store_name'];
+        $query = Store::findStoreByName($new_store_name);
+        $search_brand = Brand::findBrand($brand_id);
+
+        // if store already exists add to join table
+        if ($query) {
+            // add query to join table, need brand function for this
+            $query->addBrand($search_brand);
+
+        // else create new store and add to join table
+        } else {
+            $new_store_phone = "";
+            $new_store_address = "";
+            $blank_form = array();
+            if (!$new_store_name) {
+                array_push($blank_form, "empty");
+            } else {
+                $new_store = new Store($new_store_name, $new_store_phone, $new_store_address);
+                $new_store->save();
+                $new_store->addBrand($search_brand);
+            }
+        }
+
+        return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
+    });
 
     $app->get("/brands/{brand_id}", function($brand_id) use ($app) {
 
@@ -110,28 +117,21 @@
         $search_store = Store::findStore($store_id);
         $blank_form = array();
 
-        return $app['twig']->render('store.html.twig', array('store' => $search_store, 'brands' => $search_store->getBrandsSold(), 'blank_form' => $blank_form));
+        return $app['twig']->render('store.html.twig', array('store' => $search_store, 'store_brands' => $search_store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
+    });
+
+    $app->post("/add-brand-to-store/{store_id}", function($store_id) use ($app) {
+        $store = Store::findStore($store_id);
+        $brand = Brand::findBrand($_POST['brand_to_add']);
+
+        $brand->addStore($store);
+
+        return $app['twig']->render('store.html.twig', array('store' => $store, 'store_brands' => $store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
     });
 
     // Not needed
-    // // Gets the form to display
-    // $app->get("/stores/{store_id}/edit", function($store_id) use ($app) {
-    //     $store = Store::findStore($store_id);
-    //     return $app['twig']->render('storeEdit.html.twig', array('store' => $store));
-    // });
-    //
-    // // Edits the form data in the DB
-    // $app->post("/stores/{store_id}/edit", function($store_id) use ($app) {
-    //     $this_store = Store::findStore($store_id);
-    //     $name = $_POST['store_name'];
-    //     $phone = $_POST['store_phone'];
-    //     $address = $_POST['store_address'];
-    //     var_dump($this_store);
-    //     $this_store->update($name, $phone, $address);
-    //     var_dump($this_store);
-    //
-    //     return $app['twig']->render('storeEdit.html.twig', array('store' => $this_store));
-    // });
+
+
 
     $app->patch("/stores/{store_id}", function($store_id) use ($app) {
         $name = $_POST['store_name'];
