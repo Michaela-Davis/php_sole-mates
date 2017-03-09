@@ -24,7 +24,7 @@
             </form>
 
             <form action="/edit-store-info/{{ store.getStoreId }}" method="post">
-                <input type="hidden" name="_method" value="patch">
+                <input name="_method" type="hidden" value="patch">
                 <input type="text" name="store_name" placeholder="Store name">
                 <br><br>
                 <input type="text" name="store_phone" placeholder="Store phone">

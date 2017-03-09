@@ -62,11 +62,11 @@
 
         function update($store_name, $store_phone, $store_address)
         {
-            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$store_name}' WHERE id = {$this->getStoreId()};");
+            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$store_name}' WHERE store_id = {$this->getStoreId()};");
             $this->store_name = $store_name;
-            $GLOBALS['DB']->exec("UPDATE stores SET store_phone = '{$store_phone}' WHERE id = {$this->getStoreId()};");
+            $GLOBALS['DB']->exec("UPDATE stores SET store_phone = '{$store_phone}' WHERE store_id = {$this->getStoreId()};");
             $this->store_phone = $store_phone;
-            $GLOBALS['DB']->exec("UPDATE stores SET store_address = '{$store_address}' WHERE id = {$this->getStoreId()};");
+            $GLOBALS['DB']->exec("UPDATE stores SET store_address = '{$store_address}' WHERE store_id = {$this->getStoreId()};");
             $this->store_address = $store_address;
         }
 
