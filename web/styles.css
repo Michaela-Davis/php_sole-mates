@@ -14,11 +14,6 @@ body, h1, h2 {
     font: 2em;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-}
-
 a {
     font-size: 20px;
 }

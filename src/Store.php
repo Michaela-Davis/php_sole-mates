@@ -60,13 +60,14 @@
             $this->store_id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update($new_store_name, $new_store_phone, $new_store_address)
+        function update($store_name, $store_phone, $store_address)
         {
-            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$new_store_name}', store_phone = '{$new_store_phone}',
-                store_address = '{$new_store_address}' WHERE id = {$this->getStoreId()};");
-            // $this->store_name = (string) $new_store_name;
-            // $this->store_phone = (string) $new_store_phone;
-            // $this->store_address = (string) $new_store_address;
+            $GLOBALS['DB']->exec("UPDATE stores SET store_name = '{$store_name}' WHERE id = {$this->getStoreId()};");
+            $this->store_name = $store_name;
+            $GLOBALS['DB']->exec("UPDATE stores SET store_phone = '{$store_phone}' WHERE id = {$this->getStoreId()};");
+            $this->store_phone = $store_phone;
+            $GLOBALS['DB']->exec("UPDATE stores SET store_address = '{$store_address}' WHERE id = {$this->getStoreId()};");
+            $this->store_address = $store_address;
         }
 
         function delete()

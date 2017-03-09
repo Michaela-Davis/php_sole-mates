@@ -105,11 +105,12 @@
     });
 
     $app->post("/add-brand-to-store/{store_id}", function($store_id) use ($app) {
+
         $store = Store::findStore($store_id);
         $brand = Brand::findBrand($_POST['brand_to_add']);
         $blank_form = array();
-
         $brand->addStore($store);
+
         // go back to store page at `/stores/{store_id}`
         return $app->redirect("/stores/" . $store_id);
     });
@@ -135,6 +136,17 @@
         return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'blank_form' => $blank_form));
     });
 
+    $app->patch("/edit-store-info/{store_id}", function($store_id) use ($app) {
+
+        $store_name = $_POST['store_name'];
+        $store_phone = $_POST['store_phone'];
+        $store_address = $_POST['store_address'];
+        $this_store = Store::findStore($store_id);
+        $this_store->update($store_name, $store_phone, $store_address);
+        $blank_form = array();
+
+        return $app['twig']->render('store.html.twig', array('store' => $this_store, 'store_brands' => $this_store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
+    });
 
     ///////////      end STORE Routes      ///////////
 
