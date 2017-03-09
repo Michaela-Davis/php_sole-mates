@@ -47,29 +47,13 @@
     });
 
     $app->post("/add-store-to-brand/{brand_id}", function($brand_id) use ($app) {
-        // query the database to see if store_name already exists
-        $new_store_name = $_POST['store_name'];
-        $query = Store::findStoreByName($new_store_name);
-        $search_brand = Brand::findBrand($brand_id);
+        $store = Store::findStore($_POST['store_to_add']);
+        $brand = Brand::findBrand($brand_id);
+        $blank_form = array();
 
-        // if store already exists add to join table
-        if ($query) {
-            // add query to join table, need brand function for this
-            $query->addBrand($search_brand);
+        $brand->addStore($store);
 
-        // else create new store and add to join table
-        } else {
-            $new_store_phone = "";
-            $new_store_address = "";
-            $blank_form = array();
-            if (!$new_store_name) {
-                array_push($blank_form, "empty");
-            } else {
-                $new_store = new Store($new_store_name, $new_store_phone, $new_store_address);
-                $new_store->save();
-                $new_store->addBrand($search_brand);
-            }
-        }
+        return $app['twig']->render('store.html.twig', array('store' => $store, 'store_brands' => $store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
 
         return $app['twig']->render('brands.html.twig', array('brands'=> Brand::getAll(), 'blank_form' => $blank_form));
     });
@@ -79,7 +63,7 @@
         $search_brand = Brand::findBrand($brand_id);
         $blank_form = array();
 
-        return $app['twig']->render('brand.html.twig', array('brand' => $search_brand, 'stores' => $search_brand->getStoresSelling(), 'blank_form' => $blank_form));
+        return $app['twig']->render('brand.html.twig', array('brand' => $search_brand, 'stores_that_sell_brand' => $search_brand->getStoresSelling(), 'all_stores' => Store::getAll(), 'blank_form' => $blank_form));
     });
 
     $app->delete("/brands/{brand_id}", function($brand_id) use ($app) {
@@ -123,15 +107,12 @@
     $app->post("/add-brand-to-store/{store_id}", function($store_id) use ($app) {
         $store = Store::findStore($store_id);
         $brand = Brand::findBrand($_POST['brand_to_add']);
+        $blank_form = array();
 
         $brand->addStore($store);
 
         return $app['twig']->render('store.html.twig', array('store' => $store, 'store_brands' => $store->getBrandsSold(), 'all_brands' => Brand::getAll(), 'blank_form' => $blank_form));
     });
-
-    // Not needed
-
-
 
     $app->patch("/stores/{store_id}", function($store_id) use ($app) {
         $name = $_POST['store_name'];
@@ -144,6 +125,12 @@
     $app->delete("/stores/{store_id}", function($store_id) use ($app) {
         $store = Store::findStore($store_id);
         $store->delete();
+        $blank_form = array();
+        return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'blank_form' => $blank_form));
+    });
+
+    $app->post("/delete-all-stores", function() use ($app) {
+        Store::deleteAll();
         $blank_form = array();
         return $app['twig']->render('stores.html.twig', array('stores' => Store::getAll(), 'blank_form' => $blank_form));
     });

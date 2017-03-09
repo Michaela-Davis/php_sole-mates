@@ -30,6 +30,9 @@
                                 <button class="btn btn-info" type="submit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp; &nbsp;Add Store&nbsp;</button>
                             </div>
                         </form>
+                        <form action="/delete-all-stores"  method="post">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete ALL Stores</button>
+                        </form>
                     </div>
                 </div>
                 <br><br>
@@ -47,10 +50,7 @@
                             <li>
                                 <a href="/stores/{{ store.getStoreId }}">{{ store.getStoreName }}</a>
                             </div>
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-1">
-                            </div>
+
                             <div class="col-md-2">
                                 <form action="/stores/{{ store.getStoreId }}" method="post">
                                     <input type="hidden" name="_method" value="delete">
