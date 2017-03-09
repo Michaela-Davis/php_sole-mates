@@ -37,3 +37,7 @@ input {
 .blackText {
     color: black !important;
 }
+
+.whiteText {
+    color: white !important;
+}
