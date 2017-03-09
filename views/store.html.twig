@@ -23,6 +23,17 @@
                 <button type="submit" name="button">Add Brand to Store</button>
             </form>
 
+            <form action="/edit-store-info/{{ store.getStoreId }}" method="post">
+                <input type="hidden" name="_method" value="patch">
+                <input type="text" name="store_name" placeholder="Store name">
+                <br><br>
+                <input type="text" name="store_phone" placeholder="Store phone">
+                <br><br>
+                <input type="text" name="store_address" placeholder="Store address">
+                <br><br>
+                <button type="submit">Edit Store Info</button>
+            </form>
+
             <h2>Brands at {{ store.getStoreName }}</h2>
             <ul>
                 {% for brand in store_brands %}
@@ -30,6 +41,5 @@
                 {% endfor %}
             </ul>
         </div>
-        {% include '/components/footerBanner.html.twig' %}
     </body>
 </html>
